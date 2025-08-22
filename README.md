@@ -1,10 +1,10 @@
-# RGBlN Provider API Documentation
+# RGB Web lN Provider API Documentation
 
 ---
 
-# rgbln.enable()
+# rgbwebln.enable()
 
-To begin interacting with RGBlN APIs you'll first need to enable the provider. Calling `rgbln.enable()` will prompt the user for permission to use the wallet capabilities of the browser. After that you are free to call any of the other API methods.
+To begin interacting with rgbwebln APIs you'll first need to enable the provider. Calling `rgbwebln.enable()` will prompt the user for permission to use the wallet capabilities of the browser. After that you are free to call any of the other API methods.
 
 #### Method
 
@@ -15,17 +15,17 @@ async function enable(origin?: string): Promise<void>;
 **Example**
 
 ```javascript
-if (typeof window.rgbln !== 'undefined') {
-  await window.rgbln.enable();
-  console.log("RGBlN enabled!");
+if (typeof window.rgbwebln !== 'undefined') {
+  await window.rgbwebln.enable();
+  console.log("rgbwebln enabled!");
 }
 ```
 
 ---
 
-# rgbln.isEnabled()
+# rgbwebln.isEnabled()
 
-Check if the current origin has already been approved to use RGBlN APIs.
+Check if the current origin has already been approved to use rgbwebln APIs.
 
 #### Method
 
@@ -36,15 +36,15 @@ async function isEnabled(): Promise<boolean>;
 **Example**
 
 ```javascript
-const approved = await rgbln.isEnabled();
+const approved = await rgbwebln.isEnabled();
 console.log("Approved?", approved);
 ```
 
 ---
 
-# rgbln.getInfo()
+# rgbwebln.getInfo()
 
-Get information about the connected node and which RGBlN methods it supports.
+Get information about the connected node and which rgbwebln methods it supports.
 
 #### Method
 
@@ -68,14 +68,14 @@ interface GetInfoResponse {
 **Example**
 
 ```javascript
-await rgbln.enable();
-const info = await rgbln.getInfo();
+await rgbwebln.enable();
+const info = await rgbwebln.getInfo();
 console.log(info.node.alias, info.methods);
 ```
 
 ---
 
-# rgbln.getAddress()
+# rgbwebln.getAddress()
 
 Request a Bitcoin address from the wallet.
 
@@ -96,13 +96,13 @@ interface AddressResponse {
 **Example**
 
 ```javascript
-const { address } = await rgbln.getAddress();
+const { address } = await rgbwebln.getAddress();
 console.log("Receive BTC at:", address);
 ```
 
 ---
 
-# rgbln.rgbInvoice()
+# rgbwebln.rgbInvoice()
 
 Create an RGB invoice for a specific asset and amount.
 
@@ -134,7 +134,7 @@ interface RgbInvoiceResponse {
 **Example**
 
 ```javascript
-const invoice = await rgbln.rgbInvoice({
+const invoice = await rgbwebln.rgbInvoice({
   asset_id: 'rgb:icfqnK9y...',
   amount: 42,
   duration_seconds: 900,
@@ -145,7 +145,7 @@ console.log(invoice.invoice);
 
 ---
 
-# rgbln.decodeRgbInvoice()
+# rgbwebln.decodeRgbInvoice()
 
 Decode an RGB invoice into its structured details.
 
@@ -180,13 +180,13 @@ interface InvoiceDecoded {
 **Example**
 
 ```javascript
-const decoded = await rgbln.decodeRgbInvoice({ invoice: invoice.invoice });
+const decoded = await rgbwebln.decodeRgbInvoice({ invoice: invoice.invoice });
 console.log(decoded.asset_id, decoded.assignment.value);
 ```
 
 ---
 
-# rgbln.sendAsset()
+# rgbwebln.sendAsset()
 
 Send an RGB asset to a recipient.
 
@@ -222,7 +222,7 @@ interface TXIdResponse {
 **Example**
 
 ```javascript
-const tx = await rgbln.sendAsset({
+const tx = await rgbwebln.sendAsset({
   recipient_id: decoded.recipient_id,
   asset_id: decoded.asset_id,
   assignment: decoded.assignment,
@@ -237,7 +237,7 @@ console.log("TXID:", tx.txid);
 
 ---
 
-# rgbln.listTransfers()
+# rgbwebln.listTransfers()
 
 List transfers for a given asset.
 
@@ -267,13 +267,13 @@ interface RgbTransfer {
 **Example**
 
 ```javascript
-const transfers = await rgbln.listTransfers({ assetId: 'rgb:icfqnK9y...' });
+const transfers = await rgbwebln.listTransfers({ assetId: 'rgb:icfqnK9y...' });
 console.log(transfers.transfers);
 ```
 
 ---
 
-# rgbln.listAssets()
+# rgbwebln.listAssets()
 
 List assets managed by the wallet.
 
@@ -296,13 +296,13 @@ interface ListAssetsResponse {
 **Example**
 
 ```javascript
-const assets = await rgbln.listAssets();
+const assets = await rgbwebln.listAssets();
 console.log(assets.nia, assets.uda, assets.cfa);
 ```
 
 ---
 
-# rgbln.getNetworkInfo()
+# rgbwebln.getNetworkInfo()
 
 Get current network information (network type and block height).
 
@@ -324,13 +324,13 @@ interface NetworkInfoResponse {
 **Example**
 
 ```javascript
-const net = await rgbln.getNetworkInfo();
+const net = await rgbwebln.getNetworkInfo();
 console.log(net.network, net.height);
 ```
 
 ---
 
-# rgbln.getBTCBalance()
+# rgbwebln.getBTCBalance()
 
 Get the Bitcoin balance for the wallet.
 
@@ -360,7 +360,7 @@ interface BTCBalance {
 **Example**
 
 ```javascript
-const bal = await rgbln.getBTCBalance();
+const bal = await rgbwebln.getBTCBalance();
 console.log("BTC balance:", bal.vanilla.spendable, "sats");
 ```
 
@@ -368,7 +368,7 @@ console.log("BTC balance:", bal.vanilla.spendable, "sats");
 
 # Events
 
-Wallets can emit events to notify dapps about changes. Subscribe with `rgbln.on(event, listener)` and unsubscribe with `rgbln.off(event, listener)`.
+Wallets can emit events to notify dapps about changes. Subscribe with `rgbwebln.on(event, listener)` and unsubscribe with `rgbwebln.off(event, listener)`.
 
 #### Methods
 
@@ -379,19 +379,19 @@ function off(event: string, listener: (payload: any) => void): void;
 
 #### Supported Events
 
-* **`rgbln_ready`** – Provider injected and ready.
+* **`rgbwebln_ready`** – Provider injected and ready.
 
   * **Payload**: `{ version: string }`
-* **`rgbln_nodeChanged`** – Active node scope changed.
+* **`rgbwebln_nodeChanged`** – Active node scope changed.
 
   * **Payload**: `{}` (reserved for future use)
-* **`rgbln_networkChanged`** – Network switched (e.g., Testnet → Mainnet).
+* **`rgbwebln_networkChanged`** – Network switched (e.g., Testnet → Mainnet).
 
   * **Payload**: `{ network: 'Mainnet' | 'Testnet' | 'Regtest' }`
-* **`rgbln_transferUpdated`** – RGB transfer state progressed.
+* **`rgbwebln_transferUpdated`** – RGB transfer state progressed.
 
   * **Payload**: `{ assetId: string; transfer: RgbTransfer }`
-* **`rgbln_permissionRevoked`** – User revoked this origin’s permission.
+* **`rgbwebln_permissionRevoked`** – User revoked this origin’s permission.
 
   * **Payload**: `{}`
 
@@ -402,57 +402,57 @@ const onTransfer = (p: { assetId: string; transfer: RgbTransfer }) => {
   console.log('Transfer update:', p.transfer.status);
 };
 
-rgbln.on('rgbln_transferUpdated', onTransfer);
+rgbwebln.on('rgbwebln_transferUpdated', onTransfer);
 
 // Later
-rgbln.off('rgbln_transferUpdated', onTransfer);
+rgbwebln.off('rgbwebln_transferUpdated', onTransfer);
 ```
 
 ---
 
-# Using `rgbln-sdk`
+# Using `rgbwebln-sdk`
 
 Typed client for working with the injected provider.
 
 ## Installation
 
 ```bash
-npm i rgbln-sdk
+npm i rgbwebln-sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import { RGBlNClient, waitForRGBlN } from 'rgbln-sdk';
+import { rgbweblnClient, waitForrgbwebln } from 'rgbwebln-sdk';
 
-const provider = await waitForRGBlN();
-const rgbln = new RGBlNClient(provider);
-await rgbln.enable();
+const provider = await waitForrgbwebln();
+const rgbwebln = new rgbweblnClient(provider);
+await rgbwebln.enable();
 
-const info = await rgbln.getInfo();
-const { address } = await rgbln.getAddress();
+const info = await rgbwebln.getInfo();
+const { address } = await rgbwebln.getAddress();
 ```
 
 ## React Hook Example
 
 ```tsx
 import { useEffect, useState } from 'react';
-import { RGBlNClient, waitForRGBlN } from 'rgbln-sdk';
+import { rgbweblnClient, waitForrgbwebln } from 'rgbwebln-sdk';
 
-export function useRgbln() {
-  const [client, setClient] = useState<RGBlNClient | null>(null);
+export function usergbwebln() {
+  const [client, setClient] = useState<rgbweblnClient | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const provider = await waitForRGBlN();
-        const rgbln = new RGBlNClient(provider);
-        await rgbln.enable();
-        setClient(rgbln);
+        const provider = await waitForrgbwebln();
+        const rgbwebln = new rgbweblnClient(provider);
+        await rgbwebln.enable();
+        setClient(rgbwebln);
         setReady(true);
       } catch (e) {
-        console.error('RGBlN init failed', e);
+        console.error('rgbwebln init failed', e);
       }
     })();
   }, []);
@@ -465,7 +465,7 @@ export function useRgbln() {
 
 ```typescript
 
-const state = await rgbln.request('request.listchannels');
+const state = await rgbwebln.request('request.listchannels');
 ```
 
 ## TypeScript Types
@@ -473,7 +473,7 @@ const state = await rgbln.request('request.listchannels');
 All request/response interfaces are exported:
 
 ```typescript
-import type { ListAssetsResponse, SendRGBAsset, InvoiceDecoded } from 'rgbln-sdk';
+import type { ListAssetsResponse, SendRGBAsset, InvoiceDecoded } from 'rgbwebln-sdk';
 ```
 
 > Tip: Always call `enable()` before making requests that require user consent.
