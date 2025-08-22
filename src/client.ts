@@ -21,6 +21,7 @@ export class RGBlNClient {
     listAssets() { return this.provider.listAssets(); }
     getNetworkInfo() { return this.provider.getNetworkInfo(); }
     getBTCBalance() { return this.provider.getBTCBalance(); }
+    signMessage(message: string) { return this.provider.signMessage(message); }
 
     on(e: string, cb: (p: any) => void) { this.provider.on(e, cb); }
     off(e: string, cb: (p: any) => void) { this.provider.off(e, cb); }

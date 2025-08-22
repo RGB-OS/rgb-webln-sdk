@@ -122,6 +122,10 @@ export interface EnableResult {
     uda: UdaAsset[];
     cfa: CfaAsset[];
   }
+
+  export interface SignMessageResponse {
+    signed_message: string;
+  }
   
   export interface RGBlNProvider {
     enable(origin?: string): Promise<void>;
@@ -136,6 +140,7 @@ export interface EnableResult {
     listAssets(): Promise<ListAssetsResponse>;
     getNetworkInfo(): Promise<NetworkInfoResponse>;
     getBTCBalance(): Promise<BTCBalance>;
+    signMessage(message: string): Promise<SignMessageResponse>;
     on(event: string, listener: (payload: any) => void): void;
     off(event: string, listener: (payload: any) => void): void;
   }
