@@ -139,7 +139,7 @@ export interface EnableResult {
     listTransfers(params: { assetId: string }): Promise<ListTransfersResponse>;
     listAssets(): Promise<ListAssetsResponse>;
     getNetworkInfo(): Promise<NetworkInfoResponse>;
-    getBTCBalance(): Promise<BTCBalance>;
+    getBalance(): Promise<BTCBalance>;
     signMessage(message: string): Promise<SignMessageResponse>;
     on(event: string, listener: (payload: any) => void): void;
     off(event: string, listener: (payload: any) => void): void;

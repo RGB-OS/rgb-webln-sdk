@@ -1,5 +1,73 @@
 # RGB Web lN Provider API Documentation
 
+# Using `rgb-webln-sdk`
+
+Typed client for working with the injected provider.
+
+## Installation
+
+```bash
+npm i rgb-webln-sdk
+```
+
+## Quick Start
+
+```typescript
+import { rgbweblnClient, waitForrgbwebln } from 'rgb-webln-sdk';
+
+const provider = await waitForrgbwebln();
+const rgbwebln = new rgbweblnClient(provider);
+await rgbwebln.enable();
+
+const info = await rgbwebln.getInfo();
+const { address } = await rgbwebln.getAddress();
+```
+
+## React Hook Example
+
+```tsx
+import { useEffect, useState } from 'react';
+import { rgbweblnClient, waitForrgbwebln } from 'rgb-webln-sdk';
+
+export function usergbwebln() {
+  const [client, setClient] = useState<rgbweblnClient | null>(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const provider = await waitForrgbwebln();
+        const rgbwebln = new rgbweblnClient(provider);
+        await rgbwebln.enable();
+        setClient(rgbwebln);
+        setReady(true);
+      } catch (e) {
+        console.error('rgbwebln init failed', e);
+      }
+    })();
+  }, []);
+
+  return { client, ready };
+}
+```
+
+## Raw Request (Forward Compatibility)
+
+```typescript
+
+const state = await rgbwebln.request('request.listchannels');
+```
+
+## TypeScript Types
+
+All request/response interfaces are exported:
+
+```typescript
+import type { ListAssetsResponse, SendRGBAsset, InvoiceDecoded } from 'rgbwebln-sdk';
+```
+
+> Tip: Always call `enable()` before making requests that require user consent.
+
 ---
 
 # rgbwebln.enable()
@@ -409,71 +477,3 @@ rgbwebln.off('rgbwebln_transferUpdated', onTransfer);
 ```
 
 ---
-
-# Using `rgbwebln-sdk`
-
-Typed client for working with the injected provider.
-
-## Installation
-
-```bash
-npm i rgbwebln-sdk
-```
-
-## Quick Start
-
-```typescript
-import { rgbweblnClient, waitForrgbwebln } from 'rgbwebln-sdk';
-
-const provider = await waitForrgbwebln();
-const rgbwebln = new rgbweblnClient(provider);
-await rgbwebln.enable();
-
-const info = await rgbwebln.getInfo();
-const { address } = await rgbwebln.getAddress();
-```
-
-## React Hook Example
-
-```tsx
-import { useEffect, useState } from 'react';
-import { rgbweblnClient, waitForrgbwebln } from 'rgbwebln-sdk';
-
-export function usergbwebln() {
-  const [client, setClient] = useState<rgbweblnClient | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const provider = await waitForrgbwebln();
-        const rgbwebln = new rgbweblnClient(provider);
-        await rgbwebln.enable();
-        setClient(rgbwebln);
-        setReady(true);
-      } catch (e) {
-        console.error('rgbwebln init failed', e);
-      }
-    })();
-  }, []);
-
-  return { client, ready };
-}
-```
-
-## Raw Request (Forward Compatibility)
-
-```typescript
-
-const state = await rgbwebln.request('request.listchannels');
-```
-
-## TypeScript Types
-
-All request/response interfaces are exported:
-
-```typescript
-import type { ListAssetsResponse, SendRGBAsset, InvoiceDecoded } from 'rgbwebln-sdk';
-```
-
-> Tip: Always call `enable()` before making requests that require user consent.
