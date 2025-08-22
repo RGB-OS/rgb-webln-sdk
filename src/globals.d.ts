@@ -1,8 +1,8 @@
-import type { RGBlNProvider } from './types';
+import type { RGBWebLNProvider } from './types';
 
 declare global {
   interface Window {
-    rgbwebln?: RGBlNProvider;
+    rgbwebln?: RGBWebLNProvider;
   }
 }
 

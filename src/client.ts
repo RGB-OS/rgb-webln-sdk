@@ -1,8 +1,8 @@
-import { DecodeInvoiceRequest, RGBInvoiceRequest, RGBlNProvider, SendRGBAsset } from "./types";
+import { DecodeInvoiceRequest, RGBInvoiceRequest, RGBWebLNProvider, SendRGBAsset } from "./types";
 
-export class RGBlNClient {
-    constructor(private provider: RGBlNProvider = (window as any).rgbln) {
-        if (!provider) throw new Error('RGBlN provider not found');
+export class RGBWebLNClient {
+    constructor(private provider: RGBWebLNProvider = (window as any).rgbwebln) {
+        if (!provider) throw new Error('RGB Web LN provider not found');
     }
 
     enable(origin?: string) { return this.provider.enable(origin); }

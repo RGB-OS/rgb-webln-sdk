@@ -127,7 +127,7 @@ export interface EnableResult {
     signed_message: string;
   }
   
-  export interface RGBlNProvider {
+  export interface RGBWebLNProvider {
     enable(origin?: string): Promise<void>;
     isEnabled(): Promise<boolean>;
     request<T = unknown>(args: { method: string; params?: any }): Promise<T>;
