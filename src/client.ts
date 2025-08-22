@@ -8,9 +8,9 @@ export class RGBWebLNClient {
     enable(origin?: string) { return this.provider.enable(origin); }
     isEnabled() { return this.provider.isEnabled(); }
     request<T>(method: string, params?: any) {
-        return this.provider.request<T>({ method, params });
+        return this.provider.request<T>(method, params);
     }
-    
+
     // direct passthroughs
     getInfo() { return this.provider.getInfo(); }
     getAddress() { return this.provider.getAddress(); }

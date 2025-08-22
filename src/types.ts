@@ -130,7 +130,7 @@ export interface EnableResult {
   export interface RGBWebLNProvider {
     enable(origin?: string): Promise<void>;
     isEnabled(): Promise<boolean>;
-    request<T = unknown>(args: { method: string; params?: any }): Promise<T>;
+    request<T = unknown>(method: string, params?:any): Promise<T>;
     getInfo(): Promise<GetInfoResponse>;
     getAddress(): Promise<AddressResponse>;
     rgbInvoice(params: RGBInvoiceRequest): Promise<RgbInvoiceResponse>;
