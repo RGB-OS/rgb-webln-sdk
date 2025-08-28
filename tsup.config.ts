@@ -2,9 +2,9 @@ import { defineConfig } from 'tsup';
 import { copyFileSync } from 'fs';
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['cjs'],
+  format: ['esm', 'cjs'],
   outDir: 'dist',
-  target: 'node18',
+  target: 'es2020',
   dts: true,
-  outExtension: () => ({ js: '.cjs' }),
+  splitting: false
 });

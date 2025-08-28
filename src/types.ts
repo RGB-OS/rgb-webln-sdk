@@ -126,6 +126,7 @@ export interface EnableResult {
   export interface SignMessageResponse {
     signed_message: string;
   }
+
   
   export interface RGBWebLNProvider {
     enable(origin?: string): Promise<void>;
