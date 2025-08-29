@@ -1,6 +1,6 @@
 import { DecodeInvoiceRequest, RGBInvoiceRequest, RGBWebLNProvider, SendRGBAsset } from "./types";
 
-export class RGBWebLNClient {
+export class RGBWebLNClient{
     constructor(private provider: RGBWebLNProvider = (window as any).rgbwebln) {
         if (!provider) throw new Error('RGB Web LN provider not found');
     }
@@ -17,7 +17,7 @@ export class RGBWebLNClient {
     rgbInvoice(p: RGBInvoiceRequest) { return this.provider.rgbInvoice(p); }
     decodeRgbInvoice(p: DecodeInvoiceRequest) { return this.provider.decodeRgbInvoice(p); }
     sendAsset(p: SendRGBAsset) { return this.provider.sendAsset(p); }
-    listTransfers(assetId: string) { return this.provider.listTransfers({ assetId }); }
+    listTransfers(p:{assetId: string}) { return this.provider.listTransfers(p); }
     listAssets() { return this.provider.listAssets(); }
     getNetworkInfo() { return this.provider.getNetworkInfo(); }
     getBalance() { return this.provider.getBalance(); }
